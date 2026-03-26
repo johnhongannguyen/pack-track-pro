@@ -1,119 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Pack Track Pro: Day 1</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count Days {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
+      <header>
+        <h1>Pack Track Pro</h1>
+        <nav>
+          <ul className="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Inventory</a></li>
           </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        </nav>
+      </header>
+      <main>
+        <section id="center">
+          <h2>Current Food Packages</h2>
+          <p>Monitoring packaging status and expiry dates</p>
+          <div className="package-list">
+            <table>
+              <thead>
+                <th>Package ID</th>
+                <th>Name</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+                <tr>
+                <th>DDPK7152</th>
+                <td>Quick Oats</td>
+                <td>2028.04.25</td>
+                <td>10 cases</td>
+                </tr>
+                <tr>
+                <th>DDPK7155</th>
+                <td>Instant Oats</td>
+                <td>2028.04.25</td>
+                <td>5 cases</td>
+                </tr>
+                <tr>
+                <th>DDPK7180</th>
+                <td>Rolled Oats</td>
+                <td>2028.04.25</td>
+                <td>500 cases</td>
+                </tr>
+                <tr>
+                <th>DDPK7100</th>
+                <td>Cajun Supreme Mix</td>
+                <td>2028.04.25</td>
+                <td>69 cases</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button>Count Packages</button>
+        </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      </main>
+      <footer>
+        <p>&copy; 2026 Pack Track Pro</p>
+      </footer>
     </>
   )
 }
