@@ -204,9 +204,7 @@ table,th,td,tr{
   border-bottom: 1px solid #999999;
   text-align: center;
 }
-th{
-  background-color: #d3d3d3;
-}
+
 td{
   padding: 10px;
 }

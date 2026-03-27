@@ -1,4 +1,30 @@
 import './App.css'
+const BATCH_DATA = [
+  {
+    id:"DDPK7152",
+    name:"Quick Oats",
+    expiry:"2028.04.25",
+    status:"Packed"
+  },
+  {
+    id:"DDPK7155",
+    name:"Instant Oats",
+    expiry:"2028.04.25",
+    status:"In Progress"
+  },
+  {
+    id:"DDPK7180",
+    name:"Rolled Oats",
+    expiry:"2028.04.25",
+    status:"Shipped"
+  },
+  {
+    id:"DDPK7100",
+    name:"Cajun Supreme Mix",
+    expiry:"2028.04.25",
+    status:"Pending"
+  },
+]
 
 function App() {
 
@@ -27,30 +53,14 @@ function App() {
                 <th>Status</th>
               </thead>
               <tbody>
-                <tr>
-                <th>DDPK7152</th>
-                <td>Quick Oats</td>
-                <td>2028.04.25</td>
-                <td>10 cases</td>
-                </tr>
-                <tr>
-                <th>DDPK7155</th>
-                <td>Instant Oats</td>
-                <td>2028.04.25</td>
-                <td>5 cases</td>
-                </tr>
-                <tr>
-                <th>DDPK7180</th>
-                <td>Rolled Oats</td>
-                <td>2028.04.25</td>
-                <td>500 cases</td>
-                </tr>
-                <tr>
-                <th>DDPK7100</th>
-                <td>Cajun Supreme Mix</td>
-                <td>2028.04.25</td>
-                <td>69 cases</td>
-                </tr>
+                {BATCH_DATA.map(batch =>(
+                  <tr>
+                    <td>{batch.id}</td>
+                    <td>{batch.name}</td>
+                    <td>{batch.expiry}</td>
+                    <td>{batch.status}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
