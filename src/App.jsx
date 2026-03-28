@@ -25,6 +25,8 @@ const BATCH_DATA = [
     status:"Pending"
   },
 ]
+// TODO: finish 7-day expiry logic day here
+const expiryWarning = new Date();
 
 function App() {
 
