@@ -9,7 +9,7 @@ const BATCH_DATA = [
   {
     id:"DDPK7155",
     name:"Instant Oats",
-    expiry:"2028.04.25",
+    expiry:"2026.04.31",
     status:"In Progress"
   },
   {
@@ -25,8 +25,6 @@ const BATCH_DATA = [
     status:"Pending"
   },
 ]
-// TODO: finish 7-day expiry logic day here
-const expiryWarning = new Date();
 
 function App() {
 
@@ -49,20 +47,38 @@ function App() {
           <div className="package-list">
             <table>
               <thead>
+                <tr>
                 <th>Package ID</th>
                 <th>Name</th>
                 <th>Expiry Date</th>
                 <th>Status</th>
+                </tr>
               </thead>
               <tbody>
-                {BATCH_DATA.map(batch =>(
+                {BATCH_DATA.map(batch =>{
+                  // TODO: finish 7-day expiry logic day here
+                  // get 'today' and '7 days' from now
+                  const today = new Date();
+                  const sevenDaysFromNow = new Date();
+                  sevenDaysFromNow.setDate(today.getDate() + 7);
+
+                  //convert batch date string to a Date Object
+                  const batchExpiry = new Date(batch.expiry);
+
+                  // check if it falls in the warning window
+                  const isExpiringSoon = batchExpiry >= today && batchExpiry <= sevenDaysFromNow;
+                  const isExpired = batchExpiry < today;
+                  return(
                   <tr>
                     <td>{batch.id}</td>
                     <td>{batch.name}</td>
-                    <td>{batch.expiry}</td>
+                    <td style={{color: isExpired ? 'red' : (isExpiringSoon ? 'orange' : 'inherit'),
+                      fontWeight: (isExpired || isExpiringSoon) ? 'bold' : 'normal'
+                    }}>{batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiringSoon ? '(!)' : '')}</td>
                     <td>{batch.status}</td>
                   </tr>
-                ))}
+                  );
+                })} 
               </tbody>
             </table>
           </div>
