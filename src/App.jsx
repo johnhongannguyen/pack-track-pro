@@ -3,25 +3,25 @@ const BATCH_DATA = [
   {
     id:"DDPK7152",
     name:"Quick Oats",
-    expiry:"2028.04.25",
+    expiry:"2026.04.01",
     status:"Packed"
   },
   {
     id:"DDPK7155",
     name:"Instant Oats",
-    expiry:"2026.04.31",
+    expiry:"2026.03.31",
     status:"In Progress"
   },
   {
     id:"DDPK7180",
     name:"Rolled Oats",
-    expiry:"2028.04.25",
+    expiry:"2026.03.25",
     status:"Shipped"
   },
   {
     id:"DDPK7100",
     name:"Cajun Supreme Mix",
-    expiry:"2028.04.25",
+    expiry:"2026.03.01",
     status:"Pending"
   },
 ]
@@ -55,30 +55,34 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {BATCH_DATA.map(batch =>{
-                  // TODO: finish 7-day expiry logic day here
-                  // get 'today' and '7 days' from now
-                  const today = new Date();
-                  const sevenDaysFromNow = new Date();
-                  sevenDaysFromNow.setDate(today.getDate() + 7);
+              {BATCH_DATA.map(batch => {
+                // today and 7 days from now
+                const today = new Date();
+                console.log(today.getDate())
+                console.log(today.getMonth())
+                const sevenDaysFromNow = new Date();
+                sevenDaysFromNow.setDate(today.getDate() + 7);
 
-                  //convert batch date string to a Date Object
-                  const batchExpiry = new Date(batch.expiry);
+                // convert expired date from string to Date objects
+                const expiredDate = new Date(batch.expiry);
+                console.log(expiredDate);
 
-                  // check if it falls in the warning window
-                  const isExpiringSoon = batchExpiry >= today && batchExpiry <= sevenDaysFromNow;
-                  const isExpired = batchExpiry < today;
-                  return(
+                // expire soon and expired
+                const isExpiredSoon = expiredDate >= today && expiredDate <= sevenDaysFromNow;
+                const isExpired = expiredDate < today;
+                return(
                   <tr>
                     <td>{batch.id}</td>
                     <td>{batch.name}</td>
-                    <td style={{color: isExpired ? 'red' : (isExpiringSoon ? 'orange' : 'inherit'),
-                      fontWeight: (isExpired || isExpiringSoon) ? 'bold' : 'normal'
-                    }}>{batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiringSoon ? '(!)' : '')}</td>
+                    <td style={{
+                      color: isExpired ? 'red' : (isExpiredSoon ? 'orange' : 'inherit'),
+                      fontWeight: (isExpired || isExpiredSoon) ? 'bold' : 'normal'
+                    }}
+                    >{batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiredSoon ? '(!)' : '')}</td>
                     <td>{batch.status}</td>
                   </tr>
-                  );
-                })} 
+                )
+              })}
               </tbody>
             </table>
           </div>
