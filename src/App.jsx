@@ -43,6 +43,8 @@ function App() {
       <main>
         <section id="center">
           <h2>Current Food Packages</h2>
+          <p>Total Package : {BATCH_DATA.length} cases </p>
+          <button>Count Packages</button>
           <p>Monitoring packaging status and expiry dates</p>
           <div className="package-list">
             <table>
@@ -79,14 +81,18 @@ function App() {
                       fontWeight: (isExpired || isExpiredSoon) ? 'bold' : 'normal'
                     }}
                     >{batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiredSoon ? '(!)' : '')}</td>
-                    <td>{batch.status}</td>
+                    <td style={{
+                      color: (batch.status == 'Packed' || batch.status == 'Shipped') ? 'green' : (batch.status == 'In Progress' ? 'Red': 'inherit'), 
+                      fontWeight: (batch.status == 'Pending') ? 'bolder' : 'normal'
+                    }}
+                    >{batch.status}</td>
                   </tr>
                 )
               })}
               </tbody>
             </table>
           </div>
-          <button>Count Packages</button>
+        
         </section>
 
       </main>
