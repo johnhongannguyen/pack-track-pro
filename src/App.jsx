@@ -1,4 +1,5 @@
 import './App.css'
+import { useState } from 'react';
 const BATCH_DATA = [
   {
     id:"DDPK7152",
@@ -9,24 +10,55 @@ const BATCH_DATA = [
   {
     id:"DDPK7155",
     name:"Instant Oats",
-    expiry:"2026.03.31",
+    expiry:"2026.04.31",
     status:"In Progress"
   },
   {
     id:"DDPK7180",
     name:"Rolled Oats",
-    expiry:"2026.03.25",
+    expiry:"2026.05.25",
     status:"Shipped"
   },
   {
     id:"DDPK7100",
     name:"Cajun Supreme Mix",
-    expiry:"2026.03.01",
+    expiry:"2026.06.01",
     status:"Pending"
   },
 ]
+// function sortExpiryDate(array){
+//   let isAsc = true;
+//   let isDesc = true;
+//   for(let i =0; i < array.length -1 ; i++){
+//     let j = i + 1;
+//     if(array[i] < array[j]) isDesc = false;
+//     if(array[i] > array[j]) isAsc = false;
+//   }
+//   if(isAsc) return 'yes, ascending';
+//   if(isDesc) return 'yes, descending';
+//   return 'no';
+
+// }
+
 
 function App() {
+const [data, setData] = useState(BATCH_DATA);
+const [isAsc, setIsAsc] = useState(true); // Track which way we are sorting
+
+  const handleSort = () => {
+    // 1. Create a copy of the data (React doesn't like direct mutation)
+    const sortedData = [...data].sort((a, b) => {
+      const dateA = new Date(a.expiry);
+      const dateB = new Date(b.expiry);
+      
+      // 2. The Switch Logic
+      return isAsc ? dateA - dateB : dateB - dateA;
+    });
+
+    // 3. Update the state
+    setData(sortedData);
+    setIsAsc(!isAsc); // Toggle the direction for the next click
+  };
 
   return (
     <>
@@ -52,7 +84,10 @@ function App() {
                 <tr>
                 <th>Package ID</th>
                 <th>Name</th>
-                <th>Expiry Date</th>
+                <th>Expiry Date
+                   <button onClick={handleSort}>{isAsc ? 'Sort ↑' : 'Sort ↓'}</button>
+                </th>
+               
                 <th>Status</th>
                 </tr>
               </thead>
@@ -60,14 +95,14 @@ function App() {
               {BATCH_DATA.map(batch => {
                 // today and 7 days from now
                 const today = new Date();
-                console.log(today.getDate())
-                console.log(today.getMonth())
+                // console.log(today.getDate())
+                // console.log(today.getMonth())
                 const sevenDaysFromNow = new Date();
                 sevenDaysFromNow.setDate(today.getDate() + 7);
 
                 // convert expired date from string to Date objects
                 const expiredDate = new Date(batch.expiry);
-                console.log(expiredDate);
+                // console.log(expiredDate);
 
                 // expire soon and expired
                 const isExpiredSoon = expiredDate >= today && expiredDate <= sevenDaysFromNow;
@@ -91,6 +126,7 @@ function App() {
               })}
               </tbody>
             </table>
+          
           </div>
         
         </section>
