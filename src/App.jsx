@@ -26,19 +26,7 @@ const BATCH_DATA = [
     status:"Pending"
   },
 ]
-// function sortExpiryDate(array){
-//   let isAsc = true;
-//   let isDesc = true;
-//   for(let i =0; i < array.length -1 ; i++){
-//     let j = i + 1;
-//     if(array[i] < array[j]) isDesc = false;
-//     if(array[i] > array[j]) isAsc = false;
-//   }
-//   if(isAsc) return 'yes, ascending';
-//   if(isDesc) return 'yes, descending';
-//   return 'no';
 
-// }
 
 
 function App() {
@@ -92,7 +80,7 @@ const [isAsc, setIsAsc] = useState(true); // Track which way we are sorting
                 </tr>
               </thead>
               <tbody>
-              {BATCH_DATA.map(batch => {
+              {data.map(batch => {
                 // today and 7 days from now
                 const today = new Date();
                 // console.log(today.getDate())
