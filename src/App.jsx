@@ -30,6 +30,7 @@ const BATCH_DATA = [
 
 
 function App() {
+const [searchTerm, setSearchTerm] = useState('')
 const [data, setData] = useState(BATCH_DATA);
 const [isAsc, setIsAsc] = useState(true); // Track which way we are sorting
 
