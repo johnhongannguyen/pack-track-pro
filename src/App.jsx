@@ -30,25 +30,29 @@ const BATCH_DATA = [
 
 
 function App() {
-const [searchTerm, setSearchTerm] = useState('')
+
 const [data, setData] = useState(BATCH_DATA);
-const [isAsc, setIsAsc] = useState(true); // Track which way we are sorting
+const [isAsc, setIsAsc] = useState(true);
+const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSort = () => {
-    // 1. Create a copy of the data (React doesn't like direct mutation)
-    const sortedData = [...data].sort((a, b) => {
-      const dateA = new Date(a.expiry);
-      const dateB = new Date(b.expiry);
-      
-      // 2. The Switch Logic
-      return isAsc ? dateA - dateB : dateB - dateA;
-    });
+const handleSort = () =>{
+  const sortedData = [...data].sort((a,b) => {
+    const dateA = new Date(a.expiry);
+    const dateB = new Date(b.expiry);
 
-    // 3. Update the state
-    setData(sortedData);
-    setIsAsc(!isAsc); // Toggle the direction for the next click
-  };
+    return isAsc ? dateA - dateB : dateB - dateA;
 
+  });
+
+  setData(sortedData);
+  setIsAsc(!isAsc);
+}
+
+const filteredData = () =>{
+  // checks if the batch.name includes your searchTerm
+  // add an <input> tag above your table
+  // link the input's value to searchTerm and use onChange to update the state as you type
+}
   return (
     <>
       <header>
