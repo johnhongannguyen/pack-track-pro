@@ -49,7 +49,7 @@ const handleSort = () =>{
 }
 
 const filteredSearch = data.filter(batch => {
-  batch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  return batch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
   batch.id.toLowerCase().includes(searchTerm.toLowerCase())
 });
   return (
@@ -75,7 +75,7 @@ const filteredSearch = data.filter(batch => {
               <input 
               type="text"
               placeholder='Enter your search term'
-              value={filteredSearch}
+              value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{marginBottom: '20px', padding: '10px', width:'300px'}}
               />
@@ -92,40 +92,36 @@ const filteredSearch = data.filter(batch => {
                 <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
-              {data.map(batch => {
-                // today and 7 days from now
-                const today = new Date();
-                // console.log(today.getDate())
-                // console.log(today.getMonth())
-                const sevenDaysFromNow = new Date();
-                sevenDaysFromNow.setDate(today.getDate() + 7);
+             <tbody>
+          {filteredSearch.map(batch => { // Use the filtered list here
+            const today = new Date();
+            const sevenDaysFromNow = new Date();
+            sevenDaysFromNow.setDate(today.getDate() + 7);
 
-                // convert expired date from string to Date objects
-                const expiredDate = new Date(batch.expiry);
-                // console.log(expiredDate);
+            const expiredDate = new Date(batch.expiry);
+            const isExpiredSoon = expiredDate >= today && expiredDate <= sevenDaysFromNow;
+            const isExpired = expiredDate < today;
 
-                // expire soon and expired
-                const isExpiredSoon = expiredDate >= today && expiredDate <= sevenDaysFromNow;
-                const isExpired = expiredDate < today;
-                return(
-                  <tr>
-                    <td>{batch.id}</td>
-                    <td>{batch.name}</td>
-                    <td style={{
-                      color: isExpired ? 'red' : (isExpiredSoon ? 'orange' : 'inherit'),
-                      fontWeight: (isExpired || isExpiredSoon) ? 'bold' : 'normal'
-                    }}
-                    >{batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiredSoon ? '(!)' : '')}</td>
-                    <td style={{
-                      color: (batch.status == 'Packed' || batch.status == 'Shipped') ? 'green' : (batch.status == 'In Progress' ? 'Red': 'inherit'), 
-                      fontWeight: (batch.status == 'Pending') ? 'bolder' : 'normal'
-                    }}
-                    >{batch.status}</td>
-                  </tr>
-                )
-              })}
-              </tbody>
+            return (
+              <tr key={batch.id}>
+                <td>{batch.id}</td>
+                <td>{batch.name}</td>
+                <td style={{
+                  color: isExpired ? 'red' : (isExpiredSoon ? 'orange' : 'inherit'),
+                  fontWeight: (isExpired || isExpiredSoon) ? 'bold' : 'normal'
+                }}>
+                  {batch.expiry} {isExpired ? '(EXPIRED)' : (isExpiredSoon ? '(!)' : '')}
+                </td>
+                <td style={{
+                  color: (batch.status === 'Packed' || batch.status === 'Shipped') ? 'green' : (batch.status === 'In Progress' ? 'Red' : 'inherit'),
+                  fontWeight: (batch.status === 'Pending') ? 'bolder' : 'normal'
+                }}>
+                  {batch.status}
+                </td>
+              </tr>
+            );
+          })}
+            </tbody>
             </table>
           
           </div>
