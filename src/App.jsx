@@ -48,11 +48,10 @@ const handleSort = () =>{
   setIsAsc(!isAsc);
 }
 
-const filteredData = () =>{
-  // checks if the batch.name includes your searchTerm
-  // add an <input> tag above your table
-  // link the input's value to searchTerm and use onChange to update the state as you type
-}
+const filteredSearch = data.filter(batch => {
+  batch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  batch.id.toLowerCase().includes(searchTerm.toLowerCase())
+});
   return (
     <>
       <header>
@@ -72,6 +71,15 @@ const filteredData = () =>{
           <button>Count Packages</button>
           <p>Monitoring packaging status and expiry dates</p>
           <div className="package-list">
+            <div className="search-container">
+              <input 
+              type="text"
+              placeholder='Enter your search term'
+              value={filteredSearch}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{marginBottom: '20px', padding: '10px', width:'300px'}}
+              />
+            </div>
             <table>
               <thead>
                 <tr>
