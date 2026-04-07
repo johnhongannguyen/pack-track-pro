@@ -30,11 +30,14 @@ const BATCH_DATA = [
 
 
 function App() {
-
+// updating data in the batch
 const [data, setData] = useState(BATCH_DATA);
+// updating the ascending
 const [isAsc, setIsAsc] = useState(true);
+// updating search keys or words
 const [searchTerm, setSearchTerm] = useState('');
 
+// function to sort date expiry
 const handleSort = () =>{
   const sortedData = [...data].sort((a,b) => {
     const dateA = new Date(a.expiry);
@@ -47,11 +50,11 @@ const handleSort = () =>{
   setData(sortedData);
   setIsAsc(!isAsc);
 }
-
-const filteredSearch = data.filter(batch => {
-  return batch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+const filteredSearch = data.filter((batch) => 
+  batch.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
   batch.id.toLowerCase().includes(searchTerm.toLowerCase())
-});
+)
+
   return (
     <>
       <header>
@@ -71,14 +74,14 @@ const filteredSearch = data.filter(batch => {
           <button>Count Packages</button>
           <p>Monitoring packaging status and expiry dates</p>
           <div className="package-list">
-            <div className="search-container">
+            <div className='search-containers'>
               <input 
-              type="text"
-              placeholder='Enter your search term'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{marginBottom: '20px', padding: '10px', width:'300px'}}
+                type='text'
+                placeholder='Enter your search words'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
+
             </div>
             <table>
               <thead>
