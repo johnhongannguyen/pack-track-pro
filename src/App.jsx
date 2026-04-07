@@ -52,7 +52,9 @@ const handleSort = () =>{
 }
 const filteredSearch = data.filter((batch) => 
   batch.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-  batch.id.toLowerCase().includes(searchTerm.toLowerCase())
+  batch.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  batch.expiry.includes(searchTerm) ||
+  batch.status.toLowerCase().includes(searchTerm.toLowerCase())
 )
 
   return (
@@ -80,6 +82,7 @@ const filteredSearch = data.filter((batch) =>
                 placeholder='Enter your search words'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                style={{'marginBottom': '20px', 'padding': '20px', 'width': '300px'}}
               />
 
             </div>
