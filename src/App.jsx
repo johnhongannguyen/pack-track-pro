@@ -39,18 +39,13 @@ const [searchTerm, setSearchTerm] = useState('');
 
 // function to sort date expiry
 const handleSort = () =>{
-  const sortedData = [...data].sort((a,b) => {
+  const sortData = [...data].sort((a,b) =>{
     const dateA = new Date(a.expiry);
-    console.log(dateA,'this is A');
     const dateB = new Date(b.expiry);
-    console.log(dateB,'this is B')
 
-    console.log(`subtracting ${dateA.getTime()} minus ${dateB.getTime()}`)
     return isAsc ? dateA - dateB : dateB - dateA;
-
-  });
-
-  setData(sortedData);
+  })
+  setData(sortData);
   setIsAsc(!isAsc);
 }
 const filteredSearch = data.filter((batch) => 
