@@ -25,6 +25,18 @@ const BATCH_DATA = [
     expiry:"2026.06.01",
     status:"Pending"
   },
+  {
+    id:"DDPK7190",
+    name:"Fancy Nut Mix",
+    expiry:"2026.04.10",
+    status:"Shipped"
+  },
+  {
+    id:"DDPK7899",
+    name:"Sierra Mountain Mix",
+    expiry:"2026.04.11",
+    status:"Pending"
+  },
 ]
 
 
@@ -88,8 +100,14 @@ const filteredSearch = data.filter((batch) =>
                 <tr>
                 <th>Package ID</th>
                 <th>Name</th>
-                <th>Expiry Date
-                   <button onClick={handleSort}>{isAsc ? 'Sort ↑' : 'Sort ↓'}</button>
+                <th
+                style={{'display':'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}
+                >Expiry Date
+                   <button 
+                   onClick={handleSort}>{isAsc ? 'Sort ↑' : 'Sort ↓'
+                   
+                    
+                    }</button>
                 </th>
                
                 <th>Status</th>
