@@ -100,14 +100,18 @@ const filteredSearch = data.filter((batch) =>
                 <tr>
                 <th>Package ID</th>
                 <th>Name</th>
-                <th
-                style={{'display':'flex', 'justifyContent': 'space-between', 'alignItems':'center'}}
-                >Expiry Date
+                <th style={{'padding': '10px'}}>
+                  <div style={{
+                    'display': 'flex', 
+                    'justifyContent': 'center', 
+                    'alignItems':'center',
+                    'gap':'10px'}}>
+                  <span>Expiry Date</span>
                    <button 
-                   onClick={handleSort}>{isAsc ? 'Sort ↑' : 'Sort ↓'
-                   
-                    
-                    }</button>
+                   onClick={handleSort}
+                   style={{'padding':'2px 5px', 'fontSize':'0.8rem'}}
+                   >{isAsc ? 'Sort ↑' : 'Sort ↓'}</button>
+                   </div>
                 </th>
                
                 <th>Status</th>
