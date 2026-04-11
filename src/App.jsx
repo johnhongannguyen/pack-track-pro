@@ -108,6 +108,7 @@ const filteredSearch = data.filter((batch) =>
                     'gap':'10px'}}>
                   <span>Expiry Date</span>
                    <button 
+                   className='sort-button'
                    onClick={handleSort}
                    style={{'padding':'2px 5px', 'fontSize':'0.8rem'}}
                    >{isAsc ? 'Sort ↑' : 'Sort ↓'}</button>
