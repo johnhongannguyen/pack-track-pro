@@ -82,7 +82,7 @@ const filteredSearch = data.filter((batch) =>
       <main>
         <section id="center">
           <h2>Current Food Packages</h2>
-          <p>Total Package : {BATCH_DATA.length} cases </p>
+          <p>Total Package : {filteredSearch.length} cases </p>
           <p>Monitoring packaging status and expiry dates</p>
           <div className="package-list">
             <div className='search-containers'>
