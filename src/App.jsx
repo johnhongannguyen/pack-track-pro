@@ -82,7 +82,7 @@ const filteredSearch = data.filter((batch) =>
       <main>
         <section id="center">
           <h2>Current Food Packages</h2>
-          <p>Total Package: {filteredSearch.length === 0 ? 'Not Found Any Items!!!': filteredSearch.length} {filteredSearch.length === 1 ? 'case' : 'cases'}</p>
+          <p>Total Package: {filteredSearch.length} {filteredSearch.length === 1 ? 'case' : 'cases'}</p>
           <p>Monitoring packaging status and expiry dates</p>
           <div className="package-list">
             <div className='search-containers'>
@@ -95,6 +95,25 @@ const filteredSearch = data.filter((batch) =>
               />
 
             </div>
+            {/* start of conditional rendering */}
+            {filteredSearch.length === 0 ? (
+              <div
+              style={{
+                padding: '40px',
+                textAlign: 'center',
+                backgroundColor: '#1a1a1a',
+                borderRadius: '8px',
+                border: '1px dashed #444'
+              }}
+              >
+                <p>No packing found matching "<strong>{searchTerm}</strong>"</p> 
+                <button
+                onClick={() => setSearchTerm('')}
+                style={{marginTop: '10px', padding: '8px 16px',cursor:'pointer' }}
+                >Clear Search</button>
+
+              </div>
+            ):(
             <table>
               <thead>
                 <tr>
@@ -149,7 +168,7 @@ const filteredSearch = data.filter((batch) =>
           })}
             </tbody>
             </table>
-          
+            )}
           </div>
         
         </section>
