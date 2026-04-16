@@ -37,6 +37,12 @@ const BATCH_DATA = [
     expiry:"2026.04.11",
     status:"Pending"
   },
+  {
+    id:"DDPK7709",
+    name:"Fancy Nut Mix",
+    expiry:"2026.04.11",
+    status:"Shipped"
+  },
 ]
 
 
