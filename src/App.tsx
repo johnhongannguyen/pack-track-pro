@@ -5,7 +5,7 @@ interface Batch {
   id: string;
   name: string;
   expiry: string;
-  status: "Packed" | "Shipped" | "In Progress" | "Pending";
+  status: string;
 }
 const BATCH_DATA = [
   {
@@ -54,7 +54,7 @@ const BATCH_DATA = [
 
 function App() {
   // updating data in the batch
-  const [data, setData] = useState(BATCH_DATA);
+  const [data, setData] = useState<Batch[]>(BATCH_DATA);
   // updating the ascending
   const [isAsc, setIsAsc] = useState(true);
   // updating search keys or words
@@ -63,8 +63,8 @@ function App() {
   // function to sort date expiry
   const handleSort = () => {
     const sortData = [...data].sort((a, b) => {
-      const dateA = new Date(a.expiry);
-      const dateB = new Date(b.expiry);
+      const dateA = new Date(a.expiry).getTime();
+      const dateB = new Date(b.expiry).getTime();
 
       return isAsc ? dateA - dateB : dateB - dateA;
     });
