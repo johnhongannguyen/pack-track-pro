@@ -5,9 +5,9 @@ interface Batch {
   id: string;
   name: string;
   expiry: string;
-  status: string;
+  status: "Packed" | "In Progress" | "Shipped" | "Pending";
 }
-const BATCH_DATA = [
+const BATCH_DATA: Batch[] = [
   {
     id: "DDPK7152",
     name: "Quick Oats",
